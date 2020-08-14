@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Art/enemy.png" type="Texture" id=1]
+[ext_resource path="res://Art/enemy02.png" type="Texture" id=2]
+[ext_resource path="res://Art/enemy01.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16.3435, 18.3126 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Enemy" type="Area2D"]
+position = Vector2( 321, 476 )
+collision_layer = 4
+collision_mask = 9
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.1, 0.1 )
+frames = SubResource( 2 )
+frame = 1
+[connection signal="area_entered" from="." to="." method="_on_Enemy_area_entered"]
